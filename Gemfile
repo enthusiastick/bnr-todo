@@ -1,0 +1,10 @@
+source "https://rubygems.org"
+
+gem "data_mapper"
+gem "dm-postgres-adapter"
+gem "faraday"
+gem "faraday_middleware"
+gem "gist"
+gem "pry"
+gem "sinatra"
+gem "sinatra-contrib"

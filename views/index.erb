@@ -1,0 +1,48 @@
+<ul>
+  <% @tasks.each do |task| %>
+    <li class="media-object">
+      <div class="media-object-section">
+        <form action="/<%= task.id %>" method="post" style="display: inline">
+          <input type="hidden" name="_method" value="patch">
+          <input type="hidden" name="done" value="1">
+          <input class="success button small" type="submit" value="&#10003;">
+        </form>
+
+        <form action="/<%= task.id %>" method="post" style="display: inline">
+            <input type="hidden" name="_method" value="delete">
+            <input class="alert button small" type="submit" value="&times;">
+        </form>
+
+        <% if task.done? %>
+          <s>
+            <%= task %>
+            <% if task.due_date %>
+              (Due <%= task.due_date %>)
+            <% end %>
+          </s>
+        <% else %>
+          <%= task %>
+          <% if task.due_date %>
+            (Due <%= task.due_date %>)
+          <% end %>
+        <% end %>
+        <small><a href="/<%= task.id %>">&nbsp;Details</a></small>
+      </div>
+      <% if @forecast.has_key?(task.due_date) %>
+        <div class="media-object-section">
+          <img src="<%= @forecast[task.due_date] %>" height="25">
+        </div>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<form action="/" method="post">
+  <input type="text" name="description" placeholder="Add a new task">
+  <input type="date" name="due_date">
+  <input class="button" type="submit" value="Add">
+</form>
+
+<form action="/export" method="post">
+  <input class="button" type="submit" value="Export to Gist">
+</form>

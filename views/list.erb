@@ -1,0 +1,5 @@
+# To Do List
+
+<% @tasks.each do |task| -%>
+  - [<%= task.done? ? 'x' : ' ' %>] <%= task %> <%= task.due_date ? "(Due: #{task.due_date})" : nil %> <%= @forecast.has_key?(task.due_date) ? "![forecast](#{@forecast[task.due_date]})" : nil %>
+<% end -%>
